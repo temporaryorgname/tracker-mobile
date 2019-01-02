@@ -1,0 +1,100 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'com.gladed.androidgitversion'
+
+apply from: '../spotless.gradle'
+
+android {
+    compileSdkVersion kau.targetSdk
+
+    androidGitVersion {
+        codeFormat = 'MMNNPPXX'
+        format = '%tag%%-count%%-commit%'
+        prefix 'v'
+    }
+
+    defaultConfig {
+        applicationId "com.temporaryorgname.tracker"
+        minSdkVersion kau.minSdk
+        targetSdkVersion kau.targetSdk
+        versionCode androidGitVersion.code()
+        versionName androidGitVersion.name()
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        warningsAsErrors true
+        xmlReport false
+        textReport true
+        textOutput 'stdout'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    packagingOptions {
+        pickFirst 'META-INF/library_release.kotlin_module'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions.unitTests {
+        includeAndroidResources = true
+        // Don't throw runtime exceptions for android calls that are not mocked
+        returnDefaultValues = true
+
+        // Always show the result of every unit test, even if it passes.
+        all {
+            testLogging {
+                events 'passed', 'skipped', 'failed', 'standardError'
+            }
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+}
+
+repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    androidTestImplementation kauDependency.kotlinTest
+    androidTestImplementation kauDependency.espresso
+    androidTestImplementation kauDependency.testRules
+    androidTestImplementation kauDependency.testRunner
+
+    testImplementation kauDependency.kotlinTest
+    testImplementation "org.jetbrains.kotlin:kotlin-reflect:${KOTLIN}"
+    testImplementation kauDependency.junit
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN}"
+    
+    //noinspection GradleDependency
+    implementation "ca.allanwang.kau:core:$KAU"
+    //noinspection GradleDependency
+    implementation "ca.allanwang.kau:core-ui:$KAU"
+
+    implementation "androidx.core:core-ktx:${KTX}"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${COROUTINES}"
+}
