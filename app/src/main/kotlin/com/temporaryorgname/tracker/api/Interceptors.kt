@@ -19,7 +19,6 @@ abstract class BaseInterceptor : Interceptor {
         apply(request, chain)
         return chain.proceed(request.build())
     }
-
 }
 
 private const val CONTENT_TYPE = "Content-Type"
@@ -35,5 +34,4 @@ class TokenInterceptor(private val token: () -> String) : BaseInterceptor() {
         if (token.isNotBlank())
             request.addHeader("Authorization", "Token $token")
     }
-
 }

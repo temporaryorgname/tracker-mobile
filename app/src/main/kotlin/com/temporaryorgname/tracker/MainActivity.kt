@@ -20,5 +20,4 @@ class MainActivity : KauBaseActivity() {
         fragmentTransaction.add(R.id.frame_container, fragment)
         fragmentTransaction.commit()
     }
-
 }

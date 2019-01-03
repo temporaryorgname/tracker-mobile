@@ -23,7 +23,6 @@ import com.temporaryorgname.tracker.view.UploaderView
 import kotlinx.android.synthetic.main.fragment_camera.*
 import java.io.File
 
-
 class UploaderFragment : BaseFragment() {
 
     companion object {

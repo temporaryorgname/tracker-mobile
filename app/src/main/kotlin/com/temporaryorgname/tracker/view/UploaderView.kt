@@ -16,7 +16,9 @@ import kotlinx.android.synthetic.main.view_uploader.view.*
 import java.io.File
 
 class UploaderView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private var file: File? = null
@@ -46,5 +48,4 @@ class UploaderView @JvmOverloads constructor(
         }
         api.uploadPhoto(file)
     }
-
 }

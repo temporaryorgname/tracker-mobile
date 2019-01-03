@@ -18,9 +18,7 @@ interface TrackerApi {
     @Multipart
     @POST("data/food/photo")
     fun uploadPhoto(@Part photo: MultipartBody.Part, @Part date: MultipartBody.Part): Deferred<String>
-
 }
-
 
 fun TrackerApi.uploadPhoto(photo: File): Deferred<String> {
     val photoPart =
@@ -37,4 +35,3 @@ val api = createRetrofitApi<TrackerApi>("") {
     }
     addCoroutineAdapter = true
 }
-

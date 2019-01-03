@@ -8,7 +8,6 @@ import com.bumptech.glide.request.target.Target
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 
-
 fun <T> RequestBuilder<T>.listen(continuation: Continuation<Boolean>): RequestBuilder<T> =
     addListener(object : RequestListener<T> {
         override fun onLoadFailed(

@@ -4,7 +4,6 @@ import android.util.Log
 import ca.allanwang.kau.logging.KauLogger
 import com.temporaryorgname.tracker.BuildConfig
 
-
 object L : KauLogger("Tracker", {
     when (it) {
         Log.VERBOSE -> BuildConfig.DEBUG
@@ -28,5 +27,4 @@ object L : KauLogger("Tracker", {
         if (BuildConfig.DEBUG)
             d(message)
     }
-
 }
