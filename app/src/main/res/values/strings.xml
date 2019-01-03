@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Tracker</string>
+
+    <string name="uploader_title_hint">Set title</string>
+    <string name="uploader_title_error">No title set.</string>
+    <string name="uploader_desc">Set a title and click send to upload, or swipe this view down to cancel.</string>
 </resources>

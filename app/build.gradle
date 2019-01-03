@@ -88,11 +88,13 @@ dependencies {
     testImplementation kauDependency.junit
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${KOTLIN}"
-    
+
     //noinspection GradleDependency
     implementation "ca.allanwang.kau:core:$KAU"
     //noinspection GradleDependency
     implementation "ca.allanwang.kau:core-ui:$KAU"
+    //noinspection GradleDependency
+    implementation "ca.allanwang.kau:mediapicker:$KAU"
 
     implementation "androidx.core:core-ktx:${KTX}"
 
