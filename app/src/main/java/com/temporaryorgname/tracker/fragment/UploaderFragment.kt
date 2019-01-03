@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import ca.allanwang.kau.mediapicker.createPrivateMediaFile
+import ca.allanwang.kau.utils.postDelayed
 import ca.allanwang.kau.utils.setIcon
 import ca.allanwang.kau.utils.toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -41,8 +42,8 @@ class UploaderFragment : BaseFragment() {
 
         fab_save.setIcon(GoogleMaterial.Icon.gmd_camera)
         fab_save.setOnClickListener {
-            //            requestPhoto()
-            testRequest()
+            requestPhoto()
+//            testRequest()
         }
 
         // Trick to allow peek to equal expanded height
@@ -96,8 +97,9 @@ class UploaderFragment : BaseFragment() {
         if (requestCode == CAMERA_REQUEST) {
             val file = requestFile
             if (resultCode == Activity.RESULT_OK && file != null) {
-                L.test { "Got ${file.absolutePath}" }
-                prepareSubmission(file)
+                postDelayed(500) {
+                    prepareSubmission(file)
+                }
             } else {
                 file?.delete()
                 requestFile = null
