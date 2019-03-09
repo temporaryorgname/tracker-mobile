@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath "ca.allanwang:kau:${KAU}"
-        classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta02'
+//        classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta02'
         classpath "com.android.tools.build:gradle:${ANDROID_GRADLE}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${KOTLIN}"
         classpath "com.diffplug.spotless:spotless-plugin-gradle:${SPOTLESS}"

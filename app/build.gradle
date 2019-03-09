@@ -70,6 +70,11 @@ android {
         xmlReport false
         textReport true
         textOutput 'stdout'
+        disable 'UnusedResources',
+                'ContentDescription',
+                'RtlSymmetry',
+                'MissingTranslation',
+                'Autofill'
     }
 
     sourceSets {

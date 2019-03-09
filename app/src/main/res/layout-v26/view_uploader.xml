@@ -24,7 +24,8 @@
         android:padding="@dimen/kau_padding_normal"
         app:layout_constraintBottom_toTopOf="@id/fab_send"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/upload_desc"
@@ -41,12 +42,12 @@
         android:id="@+id/img_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="@string/upload_img_desc"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@id/upload_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/upload_img_desc" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

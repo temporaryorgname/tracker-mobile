@@ -16,6 +16,8 @@ git:
   depth: 500
 before_install:
 - openssl aes-256-cbc -K $encrypted_6871400b6a31_key -iv $encrypted_6871400b6a31_iv
+  -in tracker.tar.enc -out tracker.tar -d
+- openssl aes-256-cbc -K $encrypted_6871400b6a31_key -iv $encrypted_6871400b6a31_iv
   -in files/tracker.tar.enc -out files/tracker.tar -d
 - yes | sdkmanager "platforms;android-28"
 script:
