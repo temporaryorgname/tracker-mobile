@@ -24,6 +24,8 @@ script:
 - chmod +x gradlew
 - "./gradlew --quiet androidGitVersion"
 - "./gradlew lintRelease testReleaseUnitTest assembleRelease"
+after_success:
+- chmod +x ./generate-apk-release.sh; ./generate-apk-release.sh
 notifications:
   email: false
 sudo: false
