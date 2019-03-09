@@ -8,4 +8,6 @@ data class TrackerSignUp(val email: String, val name: String, val password: Stri
     override fun toString(): String = "TrackerSignUp(email=$email, name=$name, password=${"*".repeat(password.length)}"
 }
 
-data class TrackerResponse(val id: String)
+data class TrackerId(val id: String)
+
+data class TrackerMessage(val message: String)

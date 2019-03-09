@@ -17,14 +17,18 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import java.io.File
 
+// See https://logs.hhixl.net:5000/apidocs/
 interface TrackerApi {
+
+    @POST("data/users")
+    fun signup(@Body signup: TrackerSignUp): Call<TrackerMessage>
 
     @POST("auth/login")
     fun login(@Body login: TrackerLogin): Call<String>
 
     @Multipart
     @POST("data/photos")
-    fun uploadPhoto(@Part photo: MultipartBody.Part, @Part date: MultipartBody.Part, @Part time: MultipartBody.Part): Call<TrackerResponse>
+    fun uploadPhoto(@Part photo: MultipartBody.Part, @Part date: MultipartBody.Part, @Part time: MultipartBody.Part): Call<TrackerId>
 }
 
 internal suspend fun <T> Call<T>.await(): T? = tryOrNull {
@@ -44,7 +48,7 @@ suspend fun TrackerApi.login(email: String, password: String): String? = tryOrNu
     login(TrackerLogin(email, password)).execute().headers().get("Set-Cookie")
 }
 
-suspend fun TrackerApi.uploadPhoto(photo: File): TrackerResponse? = tryOrNull {
+suspend fun TrackerApi.uploadPhoto(photo: File): TrackerId? = tryOrNull {
     val photoPart =
         MultipartBody.Part.createFormData("file", photo.name, RequestBody.create(MediaType.parse("image/*"), photo))
     val datePart = MultipartBody.Part.createFormData("date", TimeUtils.currentDate())
@@ -52,9 +56,10 @@ suspend fun TrackerApi.uploadPhoto(photo: File): TrackerResponse? = tryOrNull {
     uploadPhoto(photoPart, datePart, timePart).execute().body()
 }
 
-val api = createRetrofitApi<TrackerApi>("https://logs.hhixl.net/api/") {
+val api = createRetrofitApi<TrackerApi>("https://logs.hhixl.net:5000/api/") {
     clientBuilder = {
         if (BuildConfig.DEBUG)
             RetrofitApiConfig.loggingInterceptor()(it)
+        // TODO go back to login if unauthorized?
     }
 }
