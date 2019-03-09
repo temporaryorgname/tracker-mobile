@@ -24,9 +24,43 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    def releaseKeystoreFile = file('../files/release.keystore')
+    def releasePropFile = file('../files/release.properties')
+    def withReleaseSigning = releaseKeystoreFile.exists() && releasePropFile.exists()
+
+    signingConfigs {
+
+        debug {
+            storeFile file("../files/debug.keystore")
+            storePassword "debugkey"
+            keyAlias "debugkey"
+            keyPassword "debugkey"
+        }
+
+        if (withReleaseSigning) {
+            def releaseProps = new Properties()
+            releasePropFile.withInputStream { releaseProps.load(it) }
+
+            release {
+                storeFile releaseKeystoreFile
+                storePassword releaseProps.getProperty('storePassword')
+                keyAlias releaseProps.getProperty('keyAlias')
+                keyPassword releaseProps.getProperty('keyPassword')
+            }
+        }
+
+    }
+
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+            signingConfig signingConfigs.debug
+        }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            if (withReleaseSigning) signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -46,6 +80,7 @@ android {
 
     packagingOptions {
         pickFirst 'META-INF/library_release.kotlin_module'
+        pickFirst 'META-INF/retrofit.kotlin_module'
     }
 
     compileOptions {

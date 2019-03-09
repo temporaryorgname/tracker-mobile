@@ -15,14 +15,14 @@ android:
 git:
   depth: 500
 before_install:
+- openssl aes-256-cbc -K $encrypted_6871400b6a31_key -iv $encrypted_6871400b6a31_iv
+  -in tracker.tar.enc -out tracker.tar -d
 - yes | sdkmanager "platforms;android-28"
-#after_success:
-#- chmod +x ./generate-apk-release.sh; ./generate-apk-release.sh
 script:
 - cd $TRAVIS_BUILD_DIR/
 - printf "Starting script\n"
 - chmod +x gradlew
-- "./gradlew lintReleaseTest testReleaseUnitTest assembleReleaseTest"
+- "./gradlew lintRelease testReleaseUnitTest assembleRelease"
 notifications:
   email: false
 sudo: false
@@ -35,3 +35,6 @@ cache:
   - "$HOME/.gradle/wrapper/"
   - "$HOME/.android/build-cache"
   - "$HOME/.m2s"
+env:
+  global:
+    secure: pm9Pqm62jl0/HtcWboDZxbm67o81lrGmUH0Mj0mG8PETKMl8KYbdreUtU6y34QqmLMwKN4V3Eok77ogRMMBopnYPhPoQvZqKlmsMlPlExZrl2+frcfiyjm1dYh8q2QG1AA+Y+MGKWUyazfxFy2GkDsz206fAWWR06beuSck0BzPEsnaTQMi6IqRG+Fpr4GqjMfgwE62Mm4IWNWhGw9bWj/9kNe/PRCEIKssNHJ0tvzI1i1ebUsZb+kajamJi0CBZZ7NSx7LeuwoPIjt1YasEPMzdpNcPn2IDTniF3fMny+ywIO2KmePpgjA2VLY6ia94dLRsXOpUrGUqe6r7jBA6zoJti0YgeW2e8PRNQJ3rxrjBYVT9oFTAvbdf3Ck4DJrREDLkuSVz5zpO0cYD4ABs0lcq3UzKtK1nGkF4NKGleepW6YoWs7U8iOPUvz5ma6fEg7I2XWSH+GWuZU53LfeLNteYfIeiFgLDwyBgc+zUKbqUoj4KPLjO+wq3b6qe/B+t/9LEeCPJ63E49z0EGSnQmDZUgCAjR29zrZGKVTY8mA9gLW028FEiJOPpWyGJ0GJYzQ8T6BU5+Nnf/yVtK8wvSTu4W0yLp2zCTItMOx1UUaVxRKJ1A4g1egjSVLd8Wqkes9NuKabZbZIgKfH3BcnpPP/sNcwTKofzGeQGY+cmpWk=
