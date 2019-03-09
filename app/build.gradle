@@ -24,6 +24,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${project.APP_ID}-${variant.buildType.name}.apk"
+        }
+    }
+
     def releaseKeystoreFile = file('../files/release.keystore')
     def releasePropFile = file('../files/release.properties')
     def withReleaseSigning = releaseKeystoreFile.exists() && releasePropFile.exists()

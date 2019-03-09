@@ -10,12 +10,13 @@ USER_AUTH=PitchedApps
 EMAIL=pitchedapps@gmail.com
 MODULE_NAME=app
 VERSION_KEY=Tracker
+FLAVOUR=release
 # Make version key different from module name
 
 # create a new directory that will contain our generated apk
 mkdir $HOME/$VERSION_KEY/
 # copy generated apk from build folder to the folder just created
-cp -a $MODULE_NAME/build/outputs/apk/releaseTest/. $HOME/$VERSION_KEY/
+cp -a $MODULE_NAME/build/outputs/apk/$FLAVOUR/. $HOME/$VERSION_KEY/
 printf "Moved apks\n"
 ls -a $HOME/${VERSION_KEY}
 
