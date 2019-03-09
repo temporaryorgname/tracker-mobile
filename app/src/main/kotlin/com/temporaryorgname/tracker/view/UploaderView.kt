@@ -13,6 +13,10 @@ import com.temporaryorgname.tracker.R
 import com.temporaryorgname.tracker.api.api
 import com.temporaryorgname.tracker.api.uploadPhoto
 import kotlinx.android.synthetic.main.view_uploader.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class UploaderView @JvmOverloads constructor(
@@ -35,17 +39,16 @@ class UploaderView @JvmOverloads constructor(
     }
 
     private fun upload() {
-//        val title: String = upload_title.text.trim().toString().replace(" ", "_")
+        val file = file ?: return context.toast("No file loaded; try again")
+        // TODO remove global scope
+        GlobalScope.launch {
+            api.uploadPhoto(file)
+        }
+            //        val title: String = upload_title.text.trim().toString().replace(" ", "_")
 //        if (title.isBlank()) {
 //            upload_title.error = context.string(R.string.uploader_title_error)
 //            upload_title.requestFocus()
 //            return
 //        }
-        val file = file
-        if (file == null) {
-            context.toast("No file loaded; try again")
-            return
-        }
-        api.uploadPhoto(file)
     }
 }

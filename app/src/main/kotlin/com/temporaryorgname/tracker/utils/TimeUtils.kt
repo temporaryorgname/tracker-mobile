@@ -6,8 +6,12 @@ import java.util.Locale
 
 object TimeUtils {
 
-    private val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA)
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CANADA)
+    private val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.CANADA)
+
+    fun currentDate(): String =
+        dateFormat.format(Date())
 
     fun currentTime(): String =
-        dateFormat.format(Date())
+        timeFormat.format(Date())
 }
