@@ -4,6 +4,7 @@ import ca.allanwang.kit.retrofit.RetrofitApiConfig
 import ca.allanwang.kit.retrofit.createRetrofitApi
 import com.temporaryorgname.tracker.BuildConfig
 import com.temporaryorgname.tracker.utils.L
+import com.temporaryorgname.tracker.utils.Prefs
 import com.temporaryorgname.tracker.utils.TimeUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -57,6 +58,7 @@ suspend fun TrackerApi.uploadPhoto(photo: File): TrackerId? = tryOrNull {
 }
 
 val api = createRetrofitApi<TrackerApi>("https://logs.hhixl.net:5000/api/") {
+    cookieRetriever = { Prefs.cookie }
     clientBuilder = {
         if (BuildConfig.DEBUG)
             RetrofitApiConfig.loggingInterceptor()(it)

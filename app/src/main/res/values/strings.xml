@@ -5,4 +5,18 @@
     <string name="uploader_title_error">No title set.</string>
     <string name="uploader_desc">Set a title and click send to upload, or swipe this view down to cancel.</string>
     <string name="upload_img_desc">Image to upload.</string>
+
+    <string name="login">Login</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_email_error">Specify email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_password_error">Specify password</string>
+    <string name="login_failed">Login failed</string>
+
+
+    <string name="photo_uploading">Uploading photo</string>
+    <string name="photo_upload_success">Photo uploaded</string>
+    <string name="photo_upload_fail">Photo failed to upload</string>
+
+
 </resources>

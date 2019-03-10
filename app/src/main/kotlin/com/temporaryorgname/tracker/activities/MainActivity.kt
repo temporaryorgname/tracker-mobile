@@ -1,7 +1,8 @@
-package com.temporaryorgname.tracker
+package com.temporaryorgname.tracker.activities
 
 import android.os.Bundle
 import ca.allanwang.kau.internal.KauBaseActivity
+import com.temporaryorgname.tracker.R
 import com.temporaryorgname.tracker.fragment.UploaderFragment
 
 class MainActivity : KauBaseActivity() {
