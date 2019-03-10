@@ -26,20 +26,21 @@ class LoginActivity : KauBaseActivity() {
     }
 
     private suspend fun attemptLogin() {
-        val email = login_email.text?.toString()?.takeIf {
-            it.isNotBlank()
+        val email = login_email.text?.toString()?.trim()?.takeIf {
+            it.isNotEmpty()
         } ?: return login_email.setError(string(R.string.login_email_error), null)
 
-        val password = login_password.text?.toString()?.takeIf {
-            it.isNotBlank()
+        val password = login_password.text?.toString()?.trim()?.takeIf {
+            it.isNotEmpty()
         } ?: return login_password.setError(string(R.string.login_password_error), null)
 
-        val cookie = api.login(email, password)
+        val result = api.login(email, password)
 
-        if (cookie == null) {
+        if (result == null) {
             snackbar(R.string.login_failed)
         } else {
-            Prefs.cookie = cookie
+            Prefs.cookie = result.cookie
+            Prefs.userId = result.id
             startActivity<MainActivity>()
         }
     }
