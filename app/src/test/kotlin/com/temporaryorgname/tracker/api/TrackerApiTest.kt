@@ -6,6 +6,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.BeforeClass
 import java.io.File
 import java.util.concurrent.atomic.AtomicReference
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 import kotlin.test.fail
@@ -15,6 +16,7 @@ class TrackerApiTest {
     companion object {
 
         lateinit var api: TrackerApi
+        lateinit var user: TrackerLoginResponse
 
         @BeforeClass
         @JvmStatic
@@ -29,12 +31,13 @@ class TrackerApiTest {
                 }
             }
             runBlocking {
-                val cookie = api.login("android", "unittest") ?: fail("Cookie not found")
-                cookieRef.set(cookie)
+                user = api.login("android", "unittest") ?: fail("Login result not found")
+                cookieRef.set(user.cookie)
             }
         }
     }
 
+    @Ignore("Ignore during full execution")
     @Test
     fun photoUpload() {
         runBlocking {
@@ -43,6 +46,15 @@ class TrackerApiTest {
                     ?: fail("Could not get image reference")
             val result = api.uploadPhoto(imageFile)
             assertNotNull(result, "Photo upload failed")
+        }
+    }
+
+    @Test
+    fun photoList() {
+        runBlocking {
+            val result = api.getPhotosForUser(user.id).await()
+            assertNotNull(result, "Photo retrieval failed")
+            print(result)
         }
     }
 }

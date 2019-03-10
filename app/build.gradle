@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.gladed.androidgitversion'
 
@@ -149,5 +150,8 @@ dependencies {
     implementation "ca.allanwang.kit:retrofit:$KIT"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${COROUTINES}"
+
+    implementation "com.github.bumptech.glide:glide:${GLIDE}"
+    kapt "com.github.bumptech.glide:compiler:${GLIDE}"
 
 }

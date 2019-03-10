@@ -2,8 +2,5 @@
 <paths>
     <external-path
         name="tracker_images"
-        path="Android/data/com.temporaryorgname.tracker" />
-    <external-path
-        name="tracker_public_images"
-        path="Pictures/FoodTracker" />
+        path="." />
 </paths>

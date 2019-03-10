@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/kau_activity_horizontal_margin"
+    android:paddingEnd="@dimen/kau_activity_horizontal_margin"
+    tools:context=".activities.LoginActivity">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/login_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/kau_padding_normal"
+        android:hint="@string/login_email_hint"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/kau_padding_small" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/kau_padding_normal"
+        android:hint="@string/login_password_hint"
+        android:inputType="textPassword"
+        android:padding="@dimen/kau_padding_small" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="120dp" />
+
+
+</LinearLayout>
