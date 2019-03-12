@@ -20,10 +20,6 @@ data class TrackerPhoto(
     val group_id: Long?,
     val id: Long,
     val user_id: Long,
-    val file: TrackerPhotoFile
-)
-
-data class TrackerPhotoFile(
-    val format: String,
-    val content: String
+    val food_id: Long?,
+    val file_url: String
 )

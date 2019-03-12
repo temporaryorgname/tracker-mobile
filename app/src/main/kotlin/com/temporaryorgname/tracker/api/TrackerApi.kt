@@ -11,7 +11,6 @@ import kotlinx.coroutines.withContext
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -36,6 +35,10 @@ interface TrackerApi {
 
     @GET("data/photos")
     fun getPhotosForUser(@Query("user_id") userId: Long): Call<List<TrackerPhoto>>
+
+    companion object {
+        const val BASE_URL = "https://logs.hhixl.net:5000/api/"
+    }
 }
 
 internal suspend fun <T> Call<T>.await(): T? = tryOrNull {
@@ -66,7 +69,7 @@ suspend fun TrackerApi.uploadPhoto(photo: File): TrackerId? = tryOrNull {
     uploadPhoto(photoPart, datePart, timePart).execute().body()
 }
 
-val api = createRetrofitApi<TrackerApi>("https://logs.hhixl.net:5000/api/") {
+val api = createRetrofitApi<TrackerApi>(TrackerApi.BASE_URL) {
     cookieRetriever = { Prefs.cookie }
     clientBuilder = {
         if (BuildConfig.DEBUG)

@@ -22,7 +22,7 @@ class TrackerApiTest {
         @JvmStatic
         fun beforeAll() {
             val cookieRef = AtomicReference<String>()
-            api = createRetrofitApi("https://logs.hhixl.net:5000/api/") {
+            api = createRetrofitApi(TrackerApi.BASE_URL) {
 
                 cookieRetriever = { cookieRef.get() }
 
